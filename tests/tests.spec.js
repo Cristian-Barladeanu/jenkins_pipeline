@@ -1,11 +1,11 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test('should switch to russian language', async ({page}) => {
+test('should open search bar', async ({page}) => {
     await page.goto('/');
-    await page.getByRole('img', { name: 'Menu' }).click();
-    await page.locator('#headerMenuDrawer').getByText('Ру').click();
-    expect (page.url()).toBe('https://tv8.md/ru');
+    await page.locator('img[alt="Search"]').click();
+    const searchBar = page.locator('#input-with-icon-grid-label');
+    await expect (searchBar).toBeVisible();
 })
 
 test('should switch to economic news', async ({page}) => {
@@ -18,9 +18,8 @@ test('should switch to economic news', async ({page}) => {
 
 test('should open side menu', async ({page}) => {
     await page.goto('/');
-    await page.getByRole('img', { name: 'Menu' }).click();
+    await page.locator('#menuDrawerTrigger').click();
     await expect(page.getByRole('link', { name: 'Despre TV8' })).toBeVisible();
-    await expect (page.getByRole('img', { name: 'Menu' })).toBeVisible();
     await expect (page.getByRole('img', { name: 'Inchide' })).toBeVisible();
     await page.close();
 })
