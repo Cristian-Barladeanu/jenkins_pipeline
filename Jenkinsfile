@@ -2,23 +2,21 @@ pipeline {
     agent any
 
     environment {
-        NVM_DIR = "$HOME/.nvm"
+        NVM_DIR = '/Users/cbarladeanu/.nvm'
         NODE_VERSION = '18.17.0'
-        PLAYWRIGHT_WORKSPACE = "${WORKSPACE}/path/to/project"
+        PATH = "$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
     }
 
     stages {
         stage('Install node') {
             steps {
                 script {
-                    sh '''
-                        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-                        export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-                        nvm install ${NODE_VERSION}
-                        nvm use ${NODE_VERSION}
-                    '''
+                    echo "NVM_DIR: ${NVM_DIR}"
+                    ls -la ${NVM_DIR}
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+                    nvm install 18.17.0
+                    nvm use 18.17.0
                 }
             }
         }
@@ -26,9 +24,7 @@ pipeline {
         stage('Install npm') {
             steps {
                 script {
-                    sh '''
-                        npm install -g npm@latest
-                    '''
+                    npm install -g npm@latest
                 }
             }
         }
@@ -36,12 +32,9 @@ pipeline {
         stage('Install Playwright') {
             steps {
                 script {
-                    dir("${PLAYWRIGHT_WORKSPACE}") {
-                        sh '''
-                            npm install -D @playwright/test
-                            npx playwright install
-                        '''
-                    }
+                    cd '/Users/cbarladeanu/Documents/ci_cd_pipeline/'
+                    npm install -D @playwright/test
+                    npx playwright install
                 }
             }
         }
@@ -49,9 +42,7 @@ pipeline {
         stage('Run tests') {
             steps {
                 script {
-                    dir("${PLAYWRIGHT_WORKSPACE}") {
-                        sh "npx playwright test"
-                    }
+                    sh "npx playwright test"
                 }
             }
         }
@@ -59,12 +50,8 @@ pipeline {
         stage('Copy Playwright HTML Report') {
             steps {
                 script {
-                    dir("${PLAYWRIGHT_WORKSPACE}") {
-                        sh '''
-                            mkdir -p ${WORKSPACE}/playwright-report-pipeline
-                            cp -R playwright-report/* ${WORKSPACE}/playwright-report-pipeline/
-                        '''
-                    }
+                    mkdir -p $WORKSPACE/playwright-report-pipeline
+                    cp -R /Users/cbarladeanu/Documents/ci_cd_task/playwright-report/* $WORKSPACE/playwright-report-pipeline/
                 }
             }
         }
