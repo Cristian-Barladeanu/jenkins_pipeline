@@ -10,13 +10,13 @@ pipeline {
         stage('Install node') {
             steps {
                 script {
-                    sh '''
-                        export NVM_DIR=${NVM_DIR}
-                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-                        nvm install 18.17.0
-                        nvm use 18.17.0
-                    '''
+                     sh '''
+                export NVM_DIR=${NVM_DIR}
+                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+                nvm install 18.17.0
+                nvm use 18.17.0
+            '''
                 }
             }
         }
