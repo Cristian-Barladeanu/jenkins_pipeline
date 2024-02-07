@@ -7,19 +7,19 @@ pipeline {
         PATH = "$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
     }
 
-    stages {
-        stage('Install node') {
-            steps {
-                script {
-                    echo "NVM_DIR: ${NVM_DIR}"
-                    ls -la ${NVM_DIR}
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-                    nvm install 18.17.0
-                    nvm use 18.17.0
-                }
-            }
+    stage('Install node') {
+    steps {
+        script {
+            echo "NVM_DIR: ${NVM_DIR}"
+            ls -la $NVM_DIR
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+            nvm install 18.17.0
+            nvm use 18.17.0
         }
+    }
+}
+
 
         stage('Install npm') {
             steps {
