@@ -20,6 +20,16 @@ pipeline {
                 }
             }
         }
+        stage('Install npm') {
+            steps {
+                script {
+                    sh '''
+                    npm install -g npm@latest
+                    '''
+                }
+            }
+        }
+
         stage('Install Playwright') {
             steps {
                 script {
