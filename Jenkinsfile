@@ -23,9 +23,7 @@ pipeline {
         stage('Install npm') {
             steps {
                 script {
-                    sh '''
-                    npm install -g npm@latest
-                    '''
+                     sh "/Users/cbarladeanu/.nvm/versions/node/v16.20.2/bin/npm install -g npm@latest"
                 }
             }
         }
