@@ -7,13 +7,11 @@ pipeline {
     }
 
     stages {
-        stage('Install Playwright') {
+        stage('Install dependencies') {
             steps {
                 script {
-                    sh '''
-                        cd /Users/cbarladeanu/Documents/ci_cd_pipeline/
-                        npm install -D @playwright/test
-                        npx playwright install
+                    sh ''' 
+                    npm install
                     '''
                 }
             }
@@ -22,7 +20,9 @@ pipeline {
         stage('Run tests') {
             steps {
                 script {
-                    sh "npx playwright test"
+                    sh ''' 
+                    npm run test
+                    '''
                 }
             }
         }
