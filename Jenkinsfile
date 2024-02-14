@@ -26,16 +26,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Get credentials for mail sending') {
-        //     steps {
-        //         script {
-        //             withCredentials([string(credentialsId: 'GMAIL_APP_PASSWORD', variable: 'GMAIL_APP_PASSWORD')]) {
-        //                 sh "export GMAIL_APP_PASSWORD=\$GMAIL_APP_PASSWORD"
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     post {
