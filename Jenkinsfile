@@ -22,17 +22,8 @@ pipeline {
                 script {
                     sh ''' 
                     npm run test
-                    '''
-                }
-            }
-        }
-
-        stage('Copy Playwright HTML Report') {
-            steps {
-                script {
-                    sh '''
-                        mkdir -p $WORKSPACE/playwright-report-pipeline
-                        cp -R /Users/cbarladeanu/Documents/ci_cd_task/playwright-report/* $WORKSPACE/playwright-report-pipeline/
+                    pwd
+                    ls -lh
                     '''
                 }
             }
