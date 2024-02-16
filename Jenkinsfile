@@ -50,7 +50,6 @@ pipeline {
             }
         }
  }
-    }
 
     post {
         always {
@@ -60,3 +59,4 @@ pipeline {
                       attachmentsPattern: 'playwright-report/*'
         }
     }
+}
