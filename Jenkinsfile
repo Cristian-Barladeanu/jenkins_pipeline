@@ -29,7 +29,18 @@ pipeline {
         stage('Publish HTML tests report') {
             steps {
                 script {
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Test Report'])
+                    def htmlReportDir = "${env.WORKSPACE}/playwright-report"
+
+            sh "ls -R ${htmlReportDir}"
+            
+            publishHTML([
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: htmlReportDir,
+                reportFiles: 'index.html',
+                reportName: 'Playwright Test Report'
+            ])
                 }
             }
         }
