@@ -30,7 +30,7 @@ pipeline {
         stage('Archive artifacts') {
             steps {
                 script {
-                    archiveArtifacts artifacts: '**/playwright-report-pipeline/index.html', followSymlinks: false
+                    archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
                 }
             }
         }
