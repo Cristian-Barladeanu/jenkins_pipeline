@@ -22,6 +22,7 @@ pipeline {
                 script {
                     sh ''' 
                     npm run test
+                    ls -lh
                     '''
                 }
             }
@@ -34,7 +35,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             emailext subject: 'Playwright Test Results',
