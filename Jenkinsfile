@@ -27,13 +27,29 @@ pipeline {
                 }
             }
         }
-        stage('Archive artifacts') {
+        // stage('Archive artifacts') {
+        //     steps {
+        //         script {
+        //             archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
+        //         }
+        //     }
+        // }
+          stage('HTML Publisher') {
             steps {
                 script {
-                    archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'playwright-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Playwright Test Report',
+                        reportTitles: 'Playwright Test Report'
+                    ])
                 }
             }
         }
+ }
     }
 
     post {

@@ -12,7 +12,7 @@ test('should switch to economic news', async ({page}) => {
     await page.goto('/');
     await page.locator('//span[normalize-space()="economic"]').click();
     await page.waitForSelector('//h1[text()="economic"]');
-    expect (page.url()).toContain('category/economic');
+    expect (page.url()).toContain('ccccategory/economic');
     await page.close();
 })
 
@@ -20,7 +20,7 @@ test('should open side menu', async ({page}) => {
     await page.goto('/');
     await page.locator('#menuDrawerTrigger').click();
     await expect(page.getByRole('link', { name: 'Despre TV8' })).toBeVisible();
-    await expect (page.getByRole('img', { name: 'Inchide' })).toBeVisible();
+    await expect (page.getByRole('img', { name: 'Inchideeeee' })).toBeVisible();
     await page.close();
 })
 
