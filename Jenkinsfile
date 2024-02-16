@@ -6,7 +6,7 @@ pipeline {
         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
     }
 
-    stages {
+        stages {
         stage('Install dependencies') {
             steps {
                 script {
@@ -23,6 +23,13 @@ pipeline {
                     sh ''' 
                     npm run test
                     '''
+                }
+            }
+        }
+        stage('Publish HTML tests report') {
+            steps {
+                script {
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Test Report'])
                 }
             }
         }
