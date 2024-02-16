@@ -41,7 +41,7 @@ pipeline {
             emailext subject: 'Playwright Test Results',
                       body: 'Check the attached Playwright HTML report for test results.',
                       to: 'cbarladeanu@griddynamics.com',
-                      attachmentsPattern: '**/playwright-report-pipeline/index.html'
+                      attachmentsPattern: 'playwright-report/*'
         }
     }
 }
