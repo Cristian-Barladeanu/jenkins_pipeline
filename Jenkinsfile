@@ -6,7 +6,7 @@ pipeline {
         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
     }
 
-        stages {
+    stages {
         stage('Install dependencies') {
             steps {
                 script {
@@ -27,32 +27,21 @@ pipeline {
                 }
             }
         }
-        // stage('Archive artifacts') {
-        //     steps {
-        //         script {
-        //             archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
-        //         }
-        //     }
-        // }
-          stage('HTML Publisher') {
-            steps {
-                script {
-                    publishHTML([
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: 'playwright-report',
-                        reportFiles: 'index.html',
-                        reportName: 'Playwright Test Report',
-                        reportTitles: 'Playwright Test Report'
-                    ])
-                }
-            }
-        }
- }
+    }
 
     post {
         always {
+            script {
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Test Report',
+                    reportTitles: 'Playwright Test Report'
+                ])
+            }
             emailext subject: 'Playwright Test Results',
                       body: 'Check the attached Playwright HTML report for test results.',
                       to: 'cbarladeanu@griddynamics.com',
