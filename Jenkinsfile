@@ -26,26 +26,15 @@ pipeline {
                 }
             }
         }
-        stage('Publish HTML tests report') {
+        stage('Archive artifacts') {
             steps {
                 script {
-                    def htmlReportDir = "${env.WORKSPACE}/playwright-report"
-
-            sh "ls -R ${htmlReportDir}"
-            
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: htmlReportDir,
-                reportFiles: 'index.html',
-                reportName: 'Playwright Test Report'
-            ])
+                    archiveArtifacts artifacts: '**/playwright-report-pipeline/index.html', followSymlinks: false
                 }
             }
         }
     }
-
+    
     post {
         always {
             emailext subject: 'Playwright Test Results',
