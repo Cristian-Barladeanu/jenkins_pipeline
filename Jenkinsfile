@@ -27,13 +27,6 @@ pipeline {
                 }
             }
         }
-        stage('Archive artifacts') {
-            steps {
-                script {
-                    archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
-                }
-            }
-        }
     }
 
     post {
@@ -48,6 +41,9 @@ pipeline {
                     reportName: 'Playwright Test Report',
                     reportTitles: 'Playwright Test Report'
                 ])
+                    archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
+            }
+        }
             }
             emailext subject: 'Playwright Test Results',
                       body: 'Check the attached Playwright HTML report for test results.',
