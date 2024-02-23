@@ -27,17 +27,20 @@ pipeline {
                 }
             }
         }
-        // stage('Archive artifacts') {
-        //     steps {
-        //         script {
-        //             archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
-        //         }
-        //     }
-        // }
-          stage('HTML Publisher') {
+        
+        stage('Archive artifacts') {
             steps {
                 script {
-                    publishHTML([
+                    archiveArtifacts artifacts: 'playwright-report/*', followSymlinks: false
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
@@ -46,13 +49,7 @@ pipeline {
                         reportName: 'Playwright Test Report',
                         reportTitles: 'Playwright Test Report'
                     ])
-                }
             }
-        }
- }
-
-    post {
-        always {
             emailext subject: 'Playwright Test Results',
                       body: 'Check the attached Playwright HTML report for test results.',
                       to: 'cbarladeanu@griddynamics.com',

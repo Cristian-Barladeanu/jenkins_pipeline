@@ -1,12 +1,12 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-// test('should open search bar', async ({page}) => {
-//     await page.goto('/');
-//     await page.locator('img[alt="Search"]').click();
-//     const searchBar = page.locator('#input-with-icon-grid-label');
-//     await expect (searchBar).toBeVisible();
-// })
+test('should open search bar', async ({page}) => {
+    await page.goto('/');
+    await page.locator('img[alt="Search"]').click();
+    const searchBar = page.locator('#input-with-icon-grid-label');
+    await expect (searchBar).toBeVisible();
+})
 
 test('should switch to economic news', async ({page}) => {
     await page.goto('/');
@@ -23,5 +23,3 @@ test('should open side menu', async ({page}) => {
     await expect (page.getByRole('img', { name: 'Inchide' })).toBeVisible();
     await page.close();
 })
-
-
