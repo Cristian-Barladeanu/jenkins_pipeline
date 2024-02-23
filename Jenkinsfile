@@ -49,3 +49,4 @@ pipeline {
               attachmentsPattern: 'playwright-report/*'
 }
 }
+}
