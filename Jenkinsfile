@@ -6,7 +6,7 @@ pipeline {
         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
     }
 
-        stages {
+    stages {
         stage('Install dependencies') {
             steps {
                 script {
